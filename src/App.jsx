@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./Header";
+import Footer from "./Footer";
 
 const App = () => {
   return (
@@ -10,16 +11,7 @@ const App = () => {
         <div>Time</div>
         <div>Control buttons</div>
       </main>
-      <footer>
-        <a
-          href="https://www.flaticon.com/free-icons/pomodoro-technique"
-          title="pomodoro technique icons"
-        >
-          Pomodoro technique icons created by Freepik - Flaticon
-        </a>{" "}
-        <br />
-        Project info
-      </footer>
+      <Footer />
     </div>
   );
 };
