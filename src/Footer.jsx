@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <div>
       <footer>
-        <section class="max-w-4xl mx-auto p-4 flex flex-col sm:flex-row sm:justify-between">
+        <section class="max-w-4xl mx-auto p-4 flex flex-row justify-between">
           <div>
             <a
               href="https://github.com/Marta-fn"
@@ -25,7 +25,7 @@ const Footer = () => {
               <FontAwesomeIcon icon={faLinkedin} />
             </a>
           </div>
-          <div class="flex flex-col sm:gap-2 text-xs md:basis-1/4 basis-1/2 justify-items-endend sm:mt-0 mt-4">
+          <div class="sm:gap-2 text-[8px] md:basis-1/4 basis-1/2 justify-items-endend sm:mt-0 mt-4">
             <a
               href="https://www.flaticon.com/free-icons/pomodoro-technique"
               title="pomodoro technique icons"
