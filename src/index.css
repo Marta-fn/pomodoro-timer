@@ -1,6 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
 @import "tailwindcss";
 
+@theme {
+  --color-focus: #ff6e80;
+  --color-short: #f8d071;
+  --color-long: #4cbf6f;
+}
+
 :root {
   background-color: #f2f4f7;
   font-family: "Lexend", serif;
