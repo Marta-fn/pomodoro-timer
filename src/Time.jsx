@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 
-const Time = ({ playing }) => {
+const Time = ({ playing, session, setsession }) => {
   const [timeLeft, settimeLeft] = useState(1500);
-  const [session, setsession] = useState("work");
   const [workNum, setworkNum] = useState(1);
+  const [sessionNum, setsessionNum] = useState(0);
   const intervalRef = useRef(null);
 
   function startTimer() {
@@ -12,11 +12,11 @@ const Time = ({ playing }) => {
         if (prevTimeLeft <= 0) {
           clearInterval(intervalRef.current);
           intervalRef.current = null;
-          if (session === "work") {
+          if (session === "Focus Time") {
             setworkNum(workNum + 1);
-            setsession(workNum === 4 ? "long" : "short");
-          } else if ((session === "short") | (session === "long")) {
-            setsession("work");
+            setsession(workNum === 4 ? "Long Break" : "Short Break");
+          } else if ((session === "Short Break") | (session === "Long Break")) {
+            setsession("Focus Time");
           }
           return 0;
         }
@@ -42,15 +42,16 @@ const Time = ({ playing }) => {
   }, [playing]);
 
   useEffect(() => {
-    if (session === "work" && playing) {
+    if (session === "Focus Time" && playing) {
       settimeLeft(1500);
       startTimer();
-    } else if (session === "short") {
+    } else if (session === "Short Break") {
       settimeLeft(300);
       startTimer();
-    } else if (session === "long") {
+    } else if (session === "Long Break") {
       settimeLeft(900);
       setworkNum(1);
+      setsessionNum(sessionNum + 1);
       startTimer();
     }
   }, [session]);
