@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Time from "./Time";
 import Icon from "./Icon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -31,13 +31,21 @@ const Timer = () => {
             sessionStyles[session].split(" ")[1]
           }`}
         >
-          <button>
+          <button
+            id="pause"
+            disabled={!isPlaying}
+            className="hover:scale-150 cursor-pointer disabled:text-gray-400 disabled:scale-100 disabled:cursor-auto"
+          >
             <FontAwesomeIcon
               icon={faPause}
               onClick={() => setisPlaying(false)}
             />
           </button>
-          <button>
+          <button
+            id="play"
+            disabled={isPlaying}
+            className="hover:scale-150 cursor-pointer disabled:text-gray-400 disabled:scale-100 disabled:cursor-auto"
+          >
             <FontAwesomeIcon icon={faPlay} onClick={() => setisPlaying(true)} />
           </button>
           <button>
