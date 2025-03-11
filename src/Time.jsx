@@ -1,6 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 
-const Time = ({ playing, session, setsession }) => {
+const Time = ({
+  playing,
+  session,
+  setsession,
+  focusTime,
+  shortBreak,
+  longBreak,
+}) => {
   const [timeLeft, settimeLeft] = useState(1500);
   const [workNum, setworkNum] = useState(1);
   const [sessionNum, setsessionNum] = useState(0);
@@ -43,18 +50,24 @@ const Time = ({ playing, session, setsession }) => {
 
   useEffect(() => {
     if (session === "Focus Time" && playing) {
-      settimeLeft(1500);
+      settimeLeft(focusTime * 60);
       startTimer();
     } else if (session === "Short Break") {
-      settimeLeft(300);
+      settimeLeft(shortBreak * 60);
       startTimer();
     } else if (session === "Long Break") {
-      settimeLeft(900);
+      settimeLeft(longBreak * 60);
       setworkNum(1);
       setsessionNum(sessionNum + 1);
       startTimer();
     }
   }, [session]);
+
+  useEffect(() => {
+    if (!playing) {
+      settimeLeft(focusTime * 60);
+    }
+  }, [focusTime]);
 
   return (
     <div className="text-8xl">
