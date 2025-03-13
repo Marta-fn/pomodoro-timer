@@ -69,7 +69,6 @@ const Time = ({
     } else if (session === "Long Break") {
       settimeLeft(longBreak * 60);
       setworkNum(1);
-      // setsessionNum(sessionNum + 1);
       startTimer();
     }
   }, [session]);
@@ -82,13 +81,13 @@ const Time = ({
 
   return (
     <div>
-      <div className="text-8xl">
+      <div className="text-8xl dark:text-gray-50">
         {String(Math.floor(timeLeft / 60)).padStart(2, "0")}
         <br />
         {String(timeLeft % 60).padStart(2, "0")}
       </div>
       <div className="mt-6 mb-2">
-        <p className="text-[12px] text-gray-700">
+        <p className="text-[12px] text-gray-700 dark:text-gray-300">
           Work sessions completed: {sessionNum}
         </p>
       </div>

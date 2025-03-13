@@ -11,7 +11,7 @@ const Footer = () => {
             <a
               href="https://github.com/Marta-fn"
               title="Marta Nogueira's Github"
-              className="text-3xl mr-4"
+              className="text-3xl mr-4 dark:text-gray-50"
               target="_blank"
             >
               <FontAwesomeIcon icon={faGithub} />
@@ -19,13 +19,13 @@ const Footer = () => {
             <a
               href="https://www.linkedin.com/in/martarfnogueira/"
               title="Marta Nogueira's LinkedIn"
-              className="text-3xl"
+              className="text-3xl dark:text-gray-50"
               target="_blank"
             >
               <FontAwesomeIcon icon={faLinkedin} />
             </a>
           </div>
-          <div class="sm:gap-2 text-[8px] md:basis-1/4 basis-1/2 justify-items-endend sm:mt-0 mt-4">
+          <div className="sm:gap-2 text-[8px] md:basis-1/4 basis-1/2 justify-items-endend sm:mt-0 mt-4 dark:text-gray-50">
             <a
               href="https://www.flaticon.com/free-icons/pomodoro-technique"
               title="pomodoro technique icons"

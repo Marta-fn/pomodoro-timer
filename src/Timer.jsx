@@ -22,14 +22,14 @@ const Timer = () => {
 
   return (
     <div>
-      <section className="bg-white flex flex-col text-center max-w-2xl p-6 rounded-2xl shadow-lg">
+      <section className="bg-white dark:bg-[#252728] flex flex-col text-center max-w-2xl p-6 rounded-2xl shadow-lg">
         <div
           className={`border p-4 pr-8 pl-8 m-4 mt-0 rounded-full flex items-center ${
             sessionStyles[session].split(" ")[0]
           }`}
         >
           <Icon session={session} />
-          <p>{session}</p>
+          <p className="dark:text-gray-50">{session}</p>
         </div>
         <Time
           playing={isPlaying}

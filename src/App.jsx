@@ -5,7 +5,7 @@ import Timer from "./Timer";
 
 const App = () => {
   return (
-    <div>
+    <div className="dark:bg-[#1C1C1D] bg-[#f2f4f7]">
       <Header />
       <div className="flex flex-col section-min-height">
         <main className="flex-grow flex items-center justify-center">

@@ -20,22 +20,26 @@ const Settings = ({
         <div className="fixed inset-0 bg-gray-500/75">
           <div className="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
             <div className="relative overflow-hidden rounded-lg text-left shadow-xl sm:w-2xs">
-              <div className="bg-white px-4 p-6 pb-4">
-                <p className="font-semibold text-gray-900 text-center sm:text-left sm:mt-0 ">
+              <div className="bg-white dark:bg-[#252728] px-4 p-6 pb-4">
+                <p className="font-semibold text-gray-900 dark:text-gray-50 text-center sm:text-left sm:mt-0 ">
                   Time Settings
                 </p>
                 <div className="mt-2">
                   <form className="grid grid-cols-2 gap-1 items-center">
-                    <label htmlFor="focusTime">Focus Time</label>
+                    <label htmlFor="focusTime" className="dark:text-gray-50">
+                      Focus Time
+                    </label>
                     <input
                       type="number"
                       id="focusTime"
                       min={0}
                       value={focusTime}
                       onChange={handleFocusChange}
-                      className="bg-gray-100 p-2 rounded-lg text-center"
+                      className="bg-gray-100  p-2 rounded-lg text-center"
                     />
-                    <label htmlFor="short">Short Break</label>
+                    <label htmlFor="short" className="dark:text-gray-50">
+                      Short Break
+                    </label>
                     <input
                       type="number"
                       id="short"
@@ -44,7 +48,9 @@ const Settings = ({
                       onChange={handleShortChange}
                       className="bg-gray-100 p-2 rounded-lg text-center"
                     />
-                    <label htmlFor="long">Long Break</label>
+                    <label htmlFor="long" className="dark:text-gray-50">
+                      Long Break
+                    </label>
                     <input
                       type="number"
                       id="long"
@@ -56,7 +62,7 @@ const Settings = ({
                   </form>
                 </div>
               </div>
-              <div className="bg-gray-100 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+              <div className="bg-gray-100 dark:bg-[#1E1F1F] px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                 <button
                   type="button"
                   data-autofocus
