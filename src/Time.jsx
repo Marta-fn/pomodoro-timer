@@ -28,6 +28,9 @@ const Time = ({
             setworkNum(workNum + 1);
             setsession(workNum === 4 ? "Long Break" : "Short Break");
           } else if ((session === "Short Break") | (session === "Long Break")) {
+            if (session === "Long Break") {
+              setsessionNum(sessionNum + 1);
+            }
             setsession("Focus Time");
           }
           return 0;
@@ -66,7 +69,7 @@ const Time = ({
     } else if (session === "Long Break") {
       settimeLeft(longBreak * 60);
       setworkNum(1);
-      setsessionNum(sessionNum + 1);
+      // setsessionNum(sessionNum + 1);
       startTimer();
     }
   }, [session]);
@@ -78,10 +81,17 @@ const Time = ({
   }, [focusTime]);
 
   return (
-    <div className="text-8xl">
-      {String(Math.floor(timeLeft / 60)).padStart(2, "0")}
-      <br />
-      {String(timeLeft % 60).padStart(2, "0")}
+    <div>
+      <div className="text-8xl">
+        {String(Math.floor(timeLeft / 60)).padStart(2, "0")}
+        <br />
+        {String(timeLeft % 60).padStart(2, "0")}
+      </div>
+      <div className="mt-6 mb-2">
+        <p className="text-[12px] text-gray-700">
+          Work sessions completed: {sessionNum}
+        </p>
+      </div>
     </div>
   );
 };

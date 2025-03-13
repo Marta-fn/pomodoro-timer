@@ -62,7 +62,11 @@ const Timer = () => {
             <FontAwesomeIcon icon={faPlay} onClick={() => setisPlaying(true)} />
           </button>
           <button>
-            <FontAwesomeIcon icon={faGear} onClick={() => setOpen(true)} />
+            <FontAwesomeIcon
+              icon={faGear}
+              onClick={() => setOpen(true)}
+              className="hover:scale-150 cursor-pointer"
+            />
           </button>
         </div>
         <Settings
