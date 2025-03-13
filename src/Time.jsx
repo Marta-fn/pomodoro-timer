@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import sound from "./assets/mixkit-soft-bell-countdown.wav";
 
 const Time = ({
   playing,
@@ -13,6 +14,10 @@ const Time = ({
   const [sessionNum, setsessionNum] = useState(0);
   const intervalRef = useRef(null);
 
+  function playSound() {
+    new Audio(sound).play();
+  }
+
   function startTimer() {
     intervalRef.current = setInterval(() => {
       settimeLeft((prevTimeLeft) => {
@@ -26,6 +31,9 @@ const Time = ({
             setsession("Focus Time");
           }
           return 0;
+        }
+        if (prevTimeLeft === 3) {
+          playSound();
         }
         return prevTimeLeft - 1;
       });
