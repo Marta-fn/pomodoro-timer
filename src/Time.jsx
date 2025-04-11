@@ -38,8 +38,6 @@ const Time = ({
         setsession("Focus Time");
       }
     }
-
-    console.log("Mensagem recebida do worker:", e.data.timeLeft);
   };
 
   // Start and Pause the timer
@@ -52,27 +50,22 @@ const Time = ({
     }
   }, [playing]);
 
-  // Alternates timeLeft beetween the sessions and starts worker after change
+  // Alternates timeLeft beetween the sessions
   useEffect(() => {
-    if (session === "Focus Time" && playing) {
-      settimeLeft(focusTime * 60);
-      worker.postMessage({
-        command: "start",
-        time: timeLeft,
-      });
+    let newTime;
+    if (session === "Focus Time") {
+      newTime = focusTime * 60;
     } else if (session === "Short Break") {
-      settimeLeft(shortBreak * 60);
-      worker.postMessage({
-        command: "start",
-        time: timeLeft,
-      });
+      newTime = shortBreak * 60;
     } else if (session === "Long Break") {
-      settimeLeft(longBreak * 60);
+      newTime = longBreak * 60;
       setworkNum(1);
-      worker.postMessage({
-        command: "start",
-        time: timeLeft,
-      });
+    }
+
+    settimeLeft(newTime);
+
+    if (playing) {
+      worker.postMessage({ command: "start", time: newTime });
     }
   }, [session]);
 
