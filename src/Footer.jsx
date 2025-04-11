@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <div>
       <footer>
-        <section class="max-w-4xl mx-auto p-4 flex flex-row justify-between">
+        <section className="max-w-4xl mx-auto p-4 flex flex-row justify-between">
           <div>
             <a
               href="https://github.com/Marta-fn"
