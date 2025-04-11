@@ -1,5 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import sound from "./assets/mixkit-soft-bell-countdown.wav";
+
+const worker = new Worker(new URL("./timeWorker.js", import.meta.url));
 
 const Time = ({
   playing,
@@ -12,67 +14,69 @@ const Time = ({
   const [timeLeft, settimeLeft] = useState(1500);
   const [workNum, setworkNum] = useState(1);
   const [sessionNum, setsessionNum] = useState(0);
-  const intervalRef = useRef(null);
 
   function playSound() {
     new Audio(sound).play();
   }
 
-  function startTimer() {
-    intervalRef.current = setInterval(() => {
-      settimeLeft((prevTimeLeft) => {
-        if (prevTimeLeft <= 0) {
-          clearInterval(intervalRef.current);
-          intervalRef.current = null;
-          if (session === "Focus Time") {
-            setworkNum(workNum + 1);
-            setsession(workNum === 4 ? "Long Break" : "Short Break");
-          } else if ((session === "Short Break") | (session === "Long Break")) {
-            if (session === "Long Break") {
-              setsessionNum(sessionNum + 1);
-            }
-            setsession("Focus Time");
-          }
-          return 0;
-        }
-        if (prevTimeLeft === 3) {
-          playSound();
-        }
-        return prevTimeLeft - 1;
-      });
-    }, 1000);
-  }
+  // Info recived by the worker
+  worker.onmessage = function (e) {
+    settimeLeft(e.data.timeLeft);
 
-  const pauseTimer = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
+    if (e.data.timeLeft === 3) {
+      playSound();
     }
+
+    if (e.data.timeLeft === 0) {
+      if (session === "Focus Time") {
+        setworkNum(workNum + 1);
+        setsession(workNum === 4 ? "Long Break" : "Short Break");
+      } else if (session === "Short Break" || session === "Long Break") {
+        if (session === "Long Break") {
+          setsessionNum(sessionNum + 1);
+        }
+        setsession("Focus Time");
+      }
+    }
+
+    console.log("Mensagem recebida do worker:", e.data.timeLeft);
   };
 
+  // Start and Pause the timer
   useEffect(() => {
     if (playing) {
-      startTimer();
+      worker.postMessage({ command: "start", time: timeLeft });
     }
     if (!playing) {
-      pauseTimer();
+      worker.postMessage({ command: "pause" });
     }
   }, [playing]);
 
+  // Alternates timeLeft beetween the sessions and starts worker after change
   useEffect(() => {
     if (session === "Focus Time" && playing) {
       settimeLeft(focusTime * 60);
-      startTimer();
+      worker.postMessage({
+        command: "start",
+        time: timeLeft,
+      });
     } else if (session === "Short Break") {
       settimeLeft(shortBreak * 60);
-      startTimer();
+      worker.postMessage({
+        command: "start",
+        time: timeLeft,
+      });
     } else if (session === "Long Break") {
       settimeLeft(longBreak * 60);
       setworkNum(1);
-      startTimer();
+      worker.postMessage({
+        command: "start",
+        time: timeLeft,
+      });
     }
   }, [session]);
 
+  // Updates Focus Time when is the first time using the timer and is on pause.
   useEffect(() => {
     if (!playing) {
       settimeLeft(focusTime * 60);
